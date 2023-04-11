@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <title>Main menu</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/ToDo style.css}"/>
+</head>
+<body>
+<h2 class="p-3 mb-2 bg-body-secondary" th:text="#{mainPage.title}">@WEB.PLANNER -> MY LIST TO DO</h2>
+<div class="p-3 mb-2">
+    <label for="locales" th:text="#{lang.change}"></label>:
+    <select id="locales">
+        <option value=""></option>
+        <option value="en" th:text="#{lang.en}"></option>
+        <option value="pl" th:text="#{lang.pl}"></option>
+    </select>
+</div>
+<hr>
+<div class="p-3 mb-2 bg-body-secondary">
+<a th:href="@{/create}" class="btn btn-success" th:text="#{createTask.message}">
+    CREATE NEW TASK
+</a>
+</div>
+<hr>
+<div class="p-3 mb-2 bg-body-secondary">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th th:text="#{taskToDo.taskDescription}">What do you have to do?</th>
+        <th th:text="#{taskToDo.category}">Category</th>
+        <th th:text="#{taskToDo.priority}">Priority</th>
+        <th th:text="#{taskToDo.date}">Deadline</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="task,iterStat: ${tasks}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${task.taskDescription}"></td>
+        <td th:switch="${task.category.name()}">
+            <p th:case="'HOME'">
+                <i class="fa fa-home fa-3x" aria-hidden="true"></i>
+            </p>
+            <p th:case="'MY_JOB'">
+                <i class="fa fa-briefcase fa-3x" aria-hidden="true"></i>
+            </p>
+            <p th:case="'MY_HEALTH'">
+                <i class="fa fa-stethoscope fa-3x" aria-hidden="true"></i>
+            </p>
+            <p th:case="'CHILDREN'">
+                <i class="fa fa-child fa-3x" aria-hidden="true"></i>
+            </p>
+            <p th:case="'MY_FREE_TIME'">
+                <i class="fa fa-bicycle fa-3x" aria-hidden="true"></i>
+            </p>
+        </td>
+        <td>
+            <span th:switch="${task.priority}">
+                    <span th:case="'1'" class="priority-circle red" th:text="${task.priority}"></span>
+                    <span th:case="'2'" class="priority-circle orange" th:text="${task.priority}"></span>
+                    <span th:case="'3'" class="priority-circle blue" th:text="${task.priority}"></span>
+                    <span th:case="'4'" class="priority-circle green" th:text="${task.priority}"></span>
+                    <span th:case="'5'" class="priority-circle darkgreen" th:text="${task.priority}"></span>
+            </span>
+        </td>
+        <td th:text="${task.date}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#locales").change(function () {
+            let lang = $('#locales').val();
+            if (lang !== '') {
+                window.location.replace('/?lang=' + lang);
+            } else {
+                window.location.replace('/');
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        let params = new URLSearchParams(window.location.search);
+        let lang = params.get('lang');
+        $('#locales').val(lang);
+    });
+</script>
+</html>

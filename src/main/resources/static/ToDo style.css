@@ -1,0 +1,77 @@
+.priority-circle {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 75px;
+    font-weight: bold;
+    font-size: 25px;
+    margin-right: 20px;
+}
+
+.priority-circle.red {
+    background-color: red;
+    color: white;
+}
+
+.priority-circle.orange {
+    background-color: orange;
+    color: white;
+}
+
+.priority-circle.blue {
+    background-color: #abab34;
+    color: white;
+}
+
+.priority-circle.green {
+    background-color: lightgreen;
+    color: white;
+}
+
+.priority-circle.darkgreen {
+    background-color: #1da91d;
+    color: white;
+}
+
+body {
+    margin: 15px;
+    font-size: 25px;
+    background-image: url("wallpaperflare.com_wallpaper.jpg");
+    background-size: cover;
+}
+.form-control {
+    background-color: #dedede;
+    border-radius: 5px;
+    height: 60px;
+    font-size: 25px;
+}
+
+.form-select-lg {
+    background-color: #dedede;
+    border: none;
+    border-radius: 5px;
+    height: 60px;
+    width: 250px;
+}
+
+.form-1 {
+    background-color: #dedede;
+    border: none;
+    border-radius: 5px;
+    height: 60px;
+    width: 250px;
+}
+
+h2 {
+    font-size: 40px !important;
+    font-weight: bold !important;
+}
+
+
+
+
+
+
+

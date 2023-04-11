@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
+    <title>Task Create Form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/ToDo style.css}"/>
+</head>
+<body>
+<h2 class="p-3 mb-2 bg-body-secondary" th:text="#{taskForm.title}">TASK CREATE FORM</h2>
+<hr>
+<div class="p-3 mb-2 bg-body-secondary">
+    <a href="/">
+        <button class="btn btn-secondary" th:text="#{backToMainPage.message}">GO BACK TO MAIN PAGE</button>
+    </a>
+</div>
+<hr>
+<div>
+    <form action="#" th:action="@{/task/create}" th:object="${task}" method="post">
+        <p class="p-3 mb-2 bg-body-secondary"><span th:text="#{taskToDo.taskDescription}"></span>:
+            <input type="text" class="form-control" th:field="*{taskDescription}" th:placeholder="#{taskToDo.taskDescription.placeholder}" required>
+        </p>
+        <p class="p-3 mb-2 bg-body-secondary"><span th:text="#{taskToDo.category}">
+        </span>:<br><select class="form-select form-select-lg" th:field="*{category}" aria-label=".form-select-lg example">
+            <option th:value="${T(com.infoshare.todo.domain.Category).HOME}" th:text="#{taskToDo.category.home}"></option>
+            <option th:value="${T(com.infoshare.todo.domain.Category).MY_JOB}" th:text="#{taskToDo.category.my-job}"></option>
+            <option th:value="${T(com.infoshare.todo.domain.Category).MY_HEALTH}" th:text="#{taskToDo.category.my-health}"></option>
+            <option th:value="${T(com.infoshare.todo.domain.Category).CHILDREN}" th:text="#{taskToDo.category.children}"></option>
+            <option th:value="${T(com.infoshare.todo.domain.Category).MY_FREE_TIME}" th:text="#{taskToDo.category.my-free-time}"></option>
+        </select>
+        </p>
+        <p class="p-3 mb-2 bg-body-secondary"><span th:text="#{taskToDo.priority}"></span>:<br>
+            <input type="number" class="form-1"  th:field="*{priority}" min="1" max="5">
+        </p>
+        <p class="p-3 mb-2 bg-body-secondary"><span th:text="#{taskToDo.date}"></span>:<br>
+            <input type="date" class="form-1"  th:field="*{date}" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+        </p>
+        <hr>
+        <p class="p-3 mb-2 bg-body-secondary"><input class="btn btn-primary" type="submit" th:value="#{submit.message}"/></p>
+    </form>
+</div>
+</body>
+</html>
